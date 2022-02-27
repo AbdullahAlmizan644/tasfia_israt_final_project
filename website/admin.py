@@ -40,7 +40,19 @@ def delete_user(sno):
     cur.connection.commit()
     return redirect("/dashborad")
 
+
+
+@admin.route("/product_dashboard")
+def product_dashboard():
+    if 'admin' in session:
+        cur=db.connection.cursor()
+        cur.execute("SELECT * FROM products")
+        products=cur.fetchall()
         
+        return render_template("admin/product_dashboard.html",products=products)
+
+    else:
+        return redirect("/admin_login")   
 
     
     
