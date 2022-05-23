@@ -30,12 +30,12 @@
 
 <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
 
-    <div id="overlayer"></div>
+    <!-- <div id="overlayer"></div>
     <div class="loader">
         <div class="spinner-border text-primary" role="status">
             <span class="sr-only">Loading...</span>
         </div>
-    </div>
+    </div> -->
 
     <div class="site-wrap">
 
@@ -63,17 +63,13 @@
                             <div class="d-flex ml-auto">
                                 <a href="#" class="d-flex align-items-center ml-auto mr-4">
                                     <span class="icon-envelope mr-2"></span>
-                                    <span class="d-none d-md-inline-block">info@domain.com</span>
+                                    <span class="d-none d-md-inline-block">info@interior.com</span>
                                 </a>
                                 <a href="#" class="d-flex align-items-center mr-4">
                                     <span class="icon-phone mr-2"></span>
-                                    <span class="d-none d-md-inline-block">+1 234 4567 8910</span>
+                                    <span class="d-none d-md-inline-block">+018-xxx-xxx</span>
                                 </a>
                                 
-                                <a href="/admin_login" class="d-flex align-items-center">
-                                    <!-- <span class="icon-phone mr-2"></span> -->
-                                    <span class="d-none d-md-inline-block">Admin Login</span>
-                                </a>
                             </div>
                         </div>
                     </div>
@@ -98,7 +94,7 @@
                                             <a href="/" class="nav-link">Home</a>
                                         </li>
                                         <li><a href="/shop" class="nav-link">shop</a></li>
-                                        <li class="has-children">
+                                        <!-- <li class="has-children">
                                             <a href="/about" class="nav-link">About Us</a>
                                             <ul class="dropdown arrow-top">
                                                 <li><a href="/team" class="nav-link">Team</a></li>
@@ -113,14 +109,18 @@
                                                     </ul>
                                                 </li>
                                             </ul>
-                                        </li>
+                                        </li> -->
                                         <li>
                                             <a href="/projects" class="nav-link">Projects</a>
                                         </li>
-                                        <li><a href="/news" class="nav-link">News</a></li>
+                                        <!-- <li><a href="/news" class="nav-link">News</a></li> -->
                                         <li><a href="/service" class="nav-link">Services</a></li>
                                         <li><a href="/contact" class="nav-link">Contact</a></li>
+                                        {% if "user" in session %}
+                                        <li><a href="/profile" class="nav-link">profile</a></li>
+                                        {% else %}
                                         <li><a href="/login" class="nav-link">Login</a></li>
+                                        {% endif %}
                                     </ul>
                                 </div>
                             </nav>
@@ -251,16 +251,6 @@
                             <h3 class="footer-heading mb-2">Subscribe Newsletter</h3>
                             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit minima minus odio.</p>
 
-                            <form action="#" method="post" class="form-subscribe">
-                                <div class="input-group mb-3">
-                                    <input type="text" class="form-control border-white text-white bg-transparent"
-                                        placeholder="Enter Email" aria-label="Enter Email"
-                                        aria-describedby="button-addon2">
-                                    <div class="input-group-append">
-                                        <button class="btn btn-primary" type="button" id="button-addon2">Send</button>
-                                    </div>
-                                </div>
-                            </form>
 
                         </div>
 

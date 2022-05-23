@@ -1,0 +1,99 @@
+{% extends "admin/base.html" %}
+{% block title %}orders -Dashboard{% endblock %}
+{% block head %}
+    {{ super() }}
+    <style type="text/css">
+        .important { color: #336699; }
+    </style>
+{% endblock %}
+
+{% block content %}
+        <!-- partial -->
+        <div class="main-panel">
+          <div class="content-wrapper">
+            <div class="row">
+              <div class="col-xl-3 col-sm-6 grid-margin stretch-card">
+                <div class="card">
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col-9">
+                        <div class="d-flex align-items-center align-self-start">
+                          <h3 class="mb-0">Total order</h3>
+                        </div>
+                      </div>
+                      <div class="col-3">
+                        <div class="icon-box-success ">
+                          <h1 class="">{{total_order[0]}}</h1>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-xl-3 col-sm-6 grid-margin stretch-card">
+                <div class="card">
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col-9">
+                        <div class="d-flex align-items-center align-self-start">
+                          <a href="/add_product"><h3 class="mb-0">Add product</h3></a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="row">
+              <div class="col-lg-12 stretch-card">
+                <div class="card">
+                  <div class="card-body">
+                    <h4 class="card-title">order Table</h4>
+                    <!-- <p class="card-description"> Add class <code>.table-{color}</code>
+                    </p> -->
+                    <div class="table-responsive">
+                      <table class="table table-bordered table-contextual">
+                        <thead>
+                          <tr>
+                            <th> # </th>
+                            <th> username </th>
+                            <th> email </th>
+                            <th> phone </th>
+                            <th> address </th>
+                            <th> product </th>
+                            <th> total </th>
+                            <th> Payment </th>
+                            <th> date </th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {% for order in orders %}
+                          <tr class="table-info">
+                            <td> {{order.0}} </td>
+                            <td> {{order.1}} </td>
+                            <td> {{order.2}} </td>
+                            <td> {{order.3}} </td>
+                            <td> {{order.4}} </td>
+                            <td> {{order.5}} </td>
+                            <td> {{order.6}} </td>
+                            <td> {{order.7}} </td>
+                            <td> <a href="/delete_order/{{order.0}}"><button type="button" class="btn btn-danger">Cancel</button></a> </td>
+                          </tr>
+                          {% endfor %}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              <div>
+            </div>
+          </div>
+          <!-- content-wrapper ends -->
+
+
+{% endblock%}

@@ -3,166 +3,122 @@
 {% block head %}
 {{ super() }}
 <style type="text/css">
-    .important { color: #336699; }
+    .important {
+        color: #336699;
+    }
 </style>
 {% endblock %}
 
 {% block content %}
 
 
-
-    <!-- Checkout Start -->
-    <div class="container-fluid pt-5">
-        <div class="row px-xl-5">
-            <div class="col-lg-8">
-                <div class="mb-4">
-                    <h4 class="font-weight-semi-bold mb-4">Billing Address</h4>
-                    <div class="row">
-                        <div class="col-md-6 form-group">
-                            <label>First Name</label>
-                            <input class="form-control" type="text" placeholder="John">
-                        </div>
-                        <div class="col-md-6 form-group">
-                            <label>Last Name</label>
-                            <input class="form-control" type="text" placeholder="Doe">
-                        </div>
-                        <div class="col-md-6 form-group">
-                            <label>E-mail</label>
-                            <input class="form-control" type="text" placeholder="example@email.com">
-                        </div>
-                        <div class="col-md-6 form-group">
-                            <label>Mobile No</label>
-                            <input class="form-control" type="text" placeholder="+123 456 789">
-                        </div>
-                        <div class="col-md-6 form-group">
-                            <label>Address Line 1</label>
-                            <input class="form-control" type="text" placeholder="123 Street">
-                        </div>
-                        <div class="col-md-6 form-group">
-                            <label>Address Line 2</label>
-                            <input class="form-control" type="text" placeholder="123 Street">
-                        </div>
-                        <div class="col-md-6 form-group">
-                            <label>Country</label>
-                            <select class="custom-select">
-                                <option selected>United States</option>
-                                <option>Afghanistan</option>
-                                <option>Albania</option>
-                                <option>Algeria</option>
-                            </select>
-                        </div>
-                        <div class="col-md-6 form-group">
-                            <label>City</label>
-                            <input class="form-control" type="text" placeholder="New York">
-                        </div>
-                        <div class="col-md-6 form-group">
-                            <label>State</label>
-                            <input class="form-control" type="text" placeholder="New York">
-                        </div>
-                        <div class="col-md-6 form-group">
-                            <label>ZIP Code</label>
-                            <input class="form-control" type="text" placeholder="123">
-                        </div>
-                        <div class="col-md-12 form-group">
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="newaccount">
-                                <label class="custom-control-label" for="newaccount">Create an account</label>
-                            </div>
-                        </div>
-                        <div class="col-md-12 form-group">
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="shipto">
-                                <label class="custom-control-label" for="shipto"  data-toggle="collapse" data-target="#shipping-address">Ship to different address</label>
-                            </div>
-                        </div>
+<form action="/checkout" id="checkout" method="post">
+<!-- Checkout Start -->
+<div class="container-fluid pt-5">
+    <div class="row px-xl-5">
+        <div class="col-lg-8">
+            <div class="mb-4">
+                <h4 class="font-weight-semi-bold mb-4">Billing Address</h4>
+                <div class="row">
+                    <div class="col-md-6 form-group">
+                        <label>E-mail</label>
+                        <input name="email" class="form-control" type="text" placeholder="example@email.com">
                     </div>
-                </div>
-                <div class="collapse mb-4" id="shipping-address">
-                    <h4 class="font-weight-semi-bold mb-4">Shipping Address</h4>
-                    <div class="row">
-                        <div class="col-md-6 form-group">
-                            <label>First Name</label>
-                            <input class="form-control" type="text" placeholder="John">
-                        </div>
-                        <div class="col-md-6 form-group">
-                            <label>Last Name</label>
-                            <input class="form-control" type="text" placeholder="Doe">
-                        </div>
-                        <div class="col-md-6 form-group">
-                            <label>E-mail</label>
-                            <input class="form-control" type="text" placeholder="example@email.com">
-                        </div>
-                        <div class="col-md-6 form-group">
-                            <label>Mobile No</label>
-                            <input class="form-control" type="text" placeholder="+123 456 789">
-                        </div>
-                        <div class="col-md-6 form-group">
-                            <label>Address Line 1</label>
-                            <input class="form-control" type="text" placeholder="123 Street">
-                        </div>
-                        <div class="col-md-6 form-group">
-                            <label>Address Line 2</label>
-                            <input class="form-control" type="text" placeholder="123 Street">
-                        </div>
-                        <div class="col-md-6 form-group">
-                            <label>Country</label>
-                            <select class="custom-select">
-                                <option selected>United States</option>
-                                <option>Afghanistan</option>
-                                <option>Albania</option>
-                                <option>Algeria</option>
-                            </select>
-                        </div>
-                        <div class="col-md-6 form-group">
-                            <label>City</label>
-                            <input class="form-control" type="text" placeholder="New York">
-                        </div>
-                        <div class="col-md-6 form-group">
-                            <label>State</label>
-                            <input class="form-control" type="text" placeholder="New York">
-                        </div>
-                        <div class="col-md-6 form-group">
-                            <label>ZIP Code</label>
-                            <input class="form-control" type="text" placeholder="123">
-                        </div>
+                    <div class="col-md-6 form-group">
+                        <label>Mobile No</label>
+                        <input name="phone" class="form-control" type="text" placeholder="+123 456 789">
+                    </div>
+                    <div class="col-md-6 form-group">
+                        <label>Address</label>
+                        <textarea name="address" class="form-control" type="text" rows="5" placeholder="address"></textarea>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-4">
-                <div class="card border-secondary mb-5">
-                    <div class="card-header bg-secondary border-0">
-                        <h4 class="font-weight-semi-bold m-0">Order Total</h4>
+            <div class="collapse mb-4" id="shipping-address">
+                <h4 class="font-weight-semi-bold mb-4">Shipping Address</h4>
+                <div class="row">
+                    <div class="col-md-6 form-group">
+                        <label>First Name</label>
+                        <input class="form-control" type="text" placeholder="John">
                     </div>
-                    <div class="card-body">
-                        <h5 class="font-weight-medium mb-3">Products</h5>
-                        <div class="d-flex justify-content-between">
-                            <p>product 1</p>
-                            <p>$150</p>
-                        </div>
-                        <div class="d-flex justify-content-between">
-                            <p>product 2</p>
-                            <p>$150</p>
-                        </div>
-                        <div class="d-flex justify-content-between">
-                            <p>product 3</p>
-                            <p>$150</p>
-                        </div>
-                        <hr class="mt-0">
-                        <div class="d-flex justify-content-between mb-3 pt-1">
-                            <h6 class="font-weight-medium">Subtotal</h6>
-                            <h6 class="font-weight-medium">$150</h6>
-                        </div>
-                        <div class="d-flex justify-content-between">
-                            <h6 class="font-weight-medium">Shipping</h6>
-                            <h6 class="font-weight-medium">$10</h6>
-                        </div>
+                    <div class="col-md-6 form-group">
+                        <label>Last Name</label>
+                        <input class="form-control" type="text" placeholder="Doe">
                     </div>
-                    <div class="card-footer border-secondary bg-transparent">
-                        <div class="d-flex justify-content-between mt-2">
-                            <h5 class="font-weight-bold">Total</h5>
-                            <h5 class="font-weight-bold">$160</h5>
-                        </div>
+                    <div class="col-md-6 form-group">
+                        <label>E-mail</label>
+                        <input class="form-control" type="text" placeholder="example@email.com">
                     </div>
+                    <div class="col-md-6 form-group">
+                        <label>Mobile No</label>
+                        <input class="form-control" type="text" placeholder="+123 456 789">
+                    </div>
+                    <div class="col-md-6 form-group">
+                        <label>Address Line 1</label>
+                        <input class="form-control" type="text" placeholder="123 Street">
+                    </div>
+                    <div class="col-md-6 form-group">
+                        <label>Address Line 2</label>
+                        <input class="form-control" type="text" placeholder="123 Street">
+                    </div>
+                    <div class="col-md-6 form-group">
+                        <label>Country</label>
+                        <select class="custom-select">
+                            <option selected>United States</option>
+                            <option>Afghanistan</option>
+                            <option>Albania</option>
+                            <option>Algeria</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6 form-group">
+                        <label>City</label>
+                        <input class="form-control" type="text" placeholder="New York">
+                    </div>
+                    <div class="col-md-6 form-group">
+                        <label>State</label>
+                        <input class="form-control" type="text" placeholder="New York">
+                    </div>
+                    <div class="col-md-6 form-group">
+                        <label>ZIP Code</label>
+                        <input class="form-control" type="text" placeholder="123">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="card border-secondary mb-5">
+                <div class="card-header bg-secondary border-0">
+                    <h4 class="font-weight-semi-bold m-0">Order Total</h4>
+                </div>
+                <div class="card-body">
+                    <h5 class="font-weight-medium mb-3">Products</h5>
+                    <table class="table site-block-order-table mb-5">
+                        <thead>
+                            <th>Product</th>
+                            <th>Total</th>
+                        </thead>
+                        <tbody id="cartTable">
+
+                        </tbody>
+                        <tbody>
+                            <tr>
+                                <td class="text-black font-weight-bold"><strong>Cart Subtotal</strong></td>
+                                <td class="text-black"><strong id="subTotal">0</strong><span>Tk</span></td>
+                            </tr>
+                            <tr>
+                                <td class="text-black font-weight-bold"><strong>shipping</strong></td>
+                                <td class="text-black"><strong id="shipping">50</strong><span>Tk</span></td>
+                            </tr>
+                            <tr>
+                                <td class="text-black font-weight-bold"><strong>Order Total</strong></td>
+                                <input type="hidden" name="total" id="totalCost">
+                                <input type="hidden" name="all" id="all">
+                                <td class="text-black font-weight-bold"><strong id="totalPrice">0</strong><span>
+                                        Tk</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
                 </div>
                 <div class="card border-secondary mb-5">
                     <div class="card-header bg-secondary border-0">
@@ -171,31 +127,117 @@
                     <div class="card-body">
                         <div class="form-group">
                             <div class="custom-control custom-radio">
-                                <input type="radio" class="custom-control-input" name="payment" id="paypal">
-                                <label class="custom-control-label" for="paypal">Paypal</label>
+                                <input type="radio" class="custom-control-input" name="payment" value="cash on delivery" id="directcheck">
+                                <label class="custom-control-label" for="directcheck">Cash on delivery</label>
+                                <img src={{url_for("static", filename="file/cash.jpg")}} height="100" width="100" alt="">
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="custom-control custom-radio">
-                                <input type="radio" class="custom-control-input" name="payment" id="directcheck">
-                                <label class="custom-control-label" for="directcheck">Direct Check</label>
+                                <input type="radio" class="custom-control-input" value="bikash"  name="payment" >
+                                <label class="custom-control-label" for="directcheck">Bikash</label>
+                                <img src={{url_for("static", filename="file/bikash.jpg")}} height="100" width="100" alt="">
                             </div>
                         </div>
                         <div class="">
                             <div class="custom-control custom-radio">
-                                <input type="radio" class="custom-control-input" name="payment" id="banktransfer">
-                                <label class="custom-control-label" for="banktransfer">Bank Transfer</label>
+                                <input type="radio" class="custom-control-input" value="nogod" name="payment" id="banktransfer">
+                                <label class="custom-control-label" for="banktransfer">Nogod</label>
+                                <img src={{url_for("static", filename="file/nogod.png")}} height="100" width="100" alt="">
                             </div>
                         </div>
                     </div>
                     <div class="card-footer border-secondary bg-transparent">
-                        <button class="btn btn-lg btn-block btn-primary font-weight-bold my-3 py-3">Place Order</button>
+                        <button form="checkout" class="btn btn-lg btn-block btn-primary font-weight-bold my-3 py-3">Place Order</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+</form>
     <!-- Checkout End -->
+    <script>
+
+        let catchProduct = [];
 
 
-{% endblock %}
+        function updateHtml() {
+            let value = JSON.parse(localStorage.getItem("product"));
+            const empty = [];
+            const cartTable = document.getElementById('cartTable');
+
+            value.forEach((element) => {
+                let html = tableRow(element.name, element.total, element.quantity);
+                empty.push(html);
+                cartTable.innerHTML = empty.join('');
+
+            });
+            console.log(empty);
+
+        }
+
+        function restore() {
+            let restoreLocalValue = parseInt(localStorage.getItem('count'));
+            const cartCounter = document.getElementById("cartCounter");
+            if (restoreLocalValue) {
+                cartCounter.textContent = restoreLocalValue;
+                subTotalPlus();
+            }
+
+
+        }
+
+
+        function subTotalPlus() {
+            const subTotal = document.querySelector("#subTotal");
+            const totalPrice = document.querySelector("#totalPrice");
+            const totalCost = document.querySelector("#totalCost");
+            // let productTotal=JSON.parse(localStorage.getItem('product'));
+            // let sum=0;
+            // for(let i=0;i<productTotal.length;i++){
+            //   sum = sum + parseInt(productTotal[i].total);
+            //   console.log(sum);
+
+            // }
+            // localStorage.setItem('subTotal',sum);
+            let catchTotal = localStorage.getItem('subTotal');
+            subTotal.innerHTML = catchTotal;
+            totalPrice.innerHTML = parseInt(catchTotal) + 50;
+            totalCost.value = parseInt(catchTotal) + 50
+            getValue();
+        }
+
+        function getValue() {
+
+            const catchValue = localStorage.getItem('product');
+
+
+
+
+            const all = document.getElementById("all");
+            all.value = catchValue;
+
+        }
+
+
+
+        function tableRow(productName, price, quantity) {
+            return `<tr>
+            <input type="hidden" value="${productName},${quantity},${price}" name="product_details">
+            <input type="hidden" value="${price}">
+            <input type="hidden" value="${quantity}" name="product">
+            <td>${productName}<strong class="mx-2">x</strong>${quantity}</td>
+            <td>${price}</td>
+          </tr>`;
+        }
+
+        window.addEventListener('load', () => {
+            updateHtml();
+            restore();
+        })
+
+
+    </script>
+
+    {% endblock %}

@@ -18,6 +18,7 @@
                 <table class="table table-bordered text-center mb-0">
                     <thead class="bg-secondary text-dark">
                         <tr>
+                            <th>Product Image</th>
                             <th>Products</th>
                             <th>Price</th>
                             <th>Quantity</th>
@@ -25,8 +26,8 @@
                             <th>Remove</th>
                         </tr>
                     </thead>
-                    <tbody class="align-middle">
-                        <tr>
+                    <tbody class="align-middle" id="cartTable">
+                        <!-- <tr>
                             <td class="align-middle"><img src="img/product-1.jpg" alt="" style="width: 50px;"> product 1</td>
                             <td class="align-middle">$150</td>
                             <td class="align-middle">
@@ -130,19 +131,19 @@
                             </td>
                             <td class="align-middle">$150</td>
                             <td class="align-middle"><button class="btn btn-sm btn-primary"><i class="fa fa-times"></i></button></td>
-                        </tr>
+                        </tr> -->
                     </tbody>
                 </table>
             </div>
             <div class="col-lg-4">
-                <form class="mb-5" action="">
+                <!-- <form class="mb-5" action="">
                     <div class="input-group">
                         <input type="text" class="form-control p-4" placeholder="Coupon Code">
                         <div class="input-group-append">
                             <button class="btn btn-primary">Apply Coupon</button>
                         </div>
                     </div>
-                </form>
+                </form> -->
                 <div class="card border-secondary mb-5">
                     <div class="card-header bg-secondary border-0">
                         <h4 class="font-weight-semi-bold m-0">Cart Summary</h4>
@@ -150,17 +151,17 @@
                     <div class="card-body">
                         <div class="d-flex justify-content-between mb-3 pt-1">
                             <h6 class="font-weight-medium">Subtotal</h6>
-                            <h6 class="font-weight-medium">$150</h6>
+                            <h6 class="font-weight-medium" id="subTotal">0</h6>
                         </div>
                         <div class="d-flex justify-content-between">
                             <h6 class="font-weight-medium">Shipping</h6>
-                            <h6 class="font-weight-medium">$10</h6>
+                            <h6 class="font-weight-medium" id="shipping">50</h6>
                         </div>
                     </div>
                     <div class="card-footer border-secondary bg-transparent">
                         <div class="d-flex justify-content-between mt-2">
                             <h5 class="font-weight-bold">Total</h5>
-                            <h5 class="font-weight-bold">$160</h5>
+                            <h5 class="font-weight-bold" id="totalPrice">0</h5>
                         </div>
                        <a href="/checkout"> <button class="btn btn-block btn-primary my-3 py-3">Proceed To Checkout</button></a>
                     </div>
@@ -170,4 +171,233 @@
     </div>
     <!-- Cart End -->
 
+
+    <script>
+
+        let value=JSON.parse(localStorage.getItem('product'));
+        let count=localStorage.getItem('count');
+        let subTotal=0;
+        
+        
+        function restore(){
+            let restoreLocalValue = parseInt(localStorage.getItem('count'));
+            const cartCounter=document.getElementById("cartCounter");
+            if(restoreLocalValue){
+                cartCounter.textContent=restoreLocalValue;
+                subTotalPlus();
+            }
+            
+        
+        }
+        
+        function updateHtml(){
+          const empty=[];
+          const productList=JSON.parse(localStorage.getItem('product'));
+          console.log(productList);
+          const cartTable=document.getElementById('cartTable');
+          if(productList.length===0){
+            cartTable.innerHTML="No Product In cart";
+          }else{
+        
+          for(let i=0;i<productList.length;i++){
+            const html=tableRow(productList[i].image,productList[i].name,productList[i].price,productList[i].quantity,productList[i].total);
+            empty.push(html);
+            cartTable.innerHTML=empty.join('' );
+        
+            
+        }
+        }
+          const cartCounter=document.querySelector("#cartCounter");
+          const plus=document.querySelectorAll("#plus");
+          const minus=document.querySelectorAll("#minus");
+          const quantityInput=document.querySelectorAll('#textbox');
+          const priceTotal=document.querySelectorAll("#priceTotal")
+          const removeButton=document.querySelectorAll("#removeButton");
+          
+          // console.log(subTotal.innerHTML);
+            // console.log(quantityInput);
+          // console.log(plus[2]);
+          plus.forEach((item,index)=>{
+            item.addEventListener('click',()=>{
+              if(quantityInput[index].value>=5){
+                alert("you can order 5 items of a product");
+                quantityInput[index].value=5;
+                value[index].quantity=5;
+                value[index].total=value[index].price*value[index].quantity;
+                priceTotal[index].innerHTML=value[index].total;
+                localStorage.setItem('product',JSON.stringify(value));
+              }else{
+        
+                quantityInput[index].value++;
+                value[index].quantity=parseInt(value[index].quantity)+1;
+                value[index].total=value[index].price*value[index].quantity;
+                priceTotal[index].innerHTML=value[index].total;
+                count++;
+                cartCounter.textContent=count;
+                localStorage.setItem('product',JSON.stringify(value));
+                localStorage.setItem('count',count);
+                subTotalPlus();
+              }
+             
+            })
+        
+          })
+        
+        
+          minus.forEach((item,index)=>{
+            item.addEventListener('click',()=>{
+              if(quantityInput[index].value<=0){
+                quantityInput[index].value=0;
+                value[index].quantity=0;
+                value[index].total=value[index].price*value[index].quantity;
+                priceTotal[index].innerHTML=value[index].total;
+                localStorage.setItem('product',JSON.stringify(value));
+              }else{
+                quantityInput[index].value--;
+                value[index].quantity=parseInt(value[index].quantity)-1;
+                value[index].total=value[index].price*value[index].quantity;
+                priceTotal[index].innerHTML=value[index].total;
+                count--;
+                cartCounter.textContent=count;
+                localStorage.setItem('product',JSON.stringify(value));
+                localStorage.setItem('count',count);
+                subTotalPlus();
+              }
+              
+              // const quantityValue=quantityInput[index];
+            })
+        
+          })
+        
+          removeButton.forEach((item,index)=>{
+            item.addEventListener('click',()=>{
+              let quantity=parseInt(value[index].quantity);
+              value.splice(index,1);
+              count=count-quantity;
+              cartCounter.textContent=count;
+              localStorage.setItem('count',count);
+              localStorage.setItem('product',JSON.stringify(value));
+              subTotalPlus();
+              updateHtml();
+            })
+        
+        
+          })
+        
+          }
+        
+        
+          function subTotalPlus(){
+            const subTotal=document.querySelector("#subTotal");
+            const totalPrice=document.querySelector("#totalPrice");
+            let productTotal=JSON.parse(localStorage.getItem('product'));
+            let sum=0;
+            for(let i=0;i<productTotal.length;i++){
+              sum = sum + parseInt(productTotal[i].total);
+              // console.log(sum);
+        
+            }
+            localStorage.setItem('subTotal',sum);
+            let catchTotal=localStorage.getItem('subTotal');
+            subTotal.innerHTML=catchTotal;
+            if(catchTotal===0){
+              totalPrice.innerHTML=0;
+            }else{
+              totalPrice.innerHTML=parseInt(catchTotal)+50;
+            }
+          }
+        
+        
+        
+        
+        function tableRow(image,name,price,quantity,total){
+          return `<tr>
+                        <td class="product-thumbnail">
+                          <img src="static/file/${image}" height="80px" width="80px" alt="Image" class="img-fluid">
+                        </td>
+                        <td class="product-name">
+                          <h2 class="h5 text-black">${name}</h2>
+                        </td>
+                        <td>${price}</td>
+                        <td>
+                          <div class="input-group mb-3" style="max-width: 120px;">
+                            <div class="input-group-prepend">
+                              <button class="btn btn-outline-primary" id="minus" type="button">&minus;</button>
+                            </div>
+                            <input type="text" class="form-control text-center" value="${quantity}" id="textbox" placeholder=""
+                              aria-label="Example text with button addon" aria-describedby="button-addon1">
+                            <div class="input-group-append">
+                              <button class="btn btn-outline-primary" id="plus" type="button">&plus;</button>
+                            </div>
+                          </div>
+        
+                        </td>
+                        <td id="priceTotal">${total}</td>
+                        <td><a href="#" class="btn btn-primary btn-sm" id="removeButton" >X</a></td>
+                      </tr>`;
+        }
+        
+        
+        
+        window.addEventListener("load",()=>{
+            updateHtml();
+            restore();
+            
+        });
+        
+          // var subTotal=document.getElementById("subTotal");
+          // var shipping = document.getElementById("shipping");
+          // var total = document.getElementById("total");
+          // var coupon = document.getElementById("coupon");
+        
+          // function decreaseNumber(i,p) {
+          //   var itemVal = document.getElementById(i);
+          //   var price = document.getElementById(p);
+        
+          //   // console.log(itemVal)
+          //   if(itemVal.value<=0){
+          //     itemVal.value=0;
+          //     alert("negitive not allowed")
+          //   }
+          //   else{
+          //     itemVal.value=parseInt(itemVal.value)-1;
+          //     price.innerHTML=parseInt(price.innerHTML)-15;
+          //     subTotal.innerHTML=parseInt(subTotal.innerHTML)-15;
+          //     total.innerHTML=parseInt(subTotal.innerHTML)+parseInt(shipping.innerHTML);
+          //   }
+            
+          // }
+        
+          // function increaseNumber(i,p) {
+          //   var itemVal = document.getElementById(i,p);
+          //   var price = document.getElementById(p);
+          //   // console.log(itemVal)
+          //   if(itemVal.value>=5){
+          //     itemVal.value=5;
+          //     alert("Maxium 5 product allowed");
+          //   }
+          //   else{
+          //     itemVal.value=parseInt(itemVal.value)+1;
+          //     price.innerHTML=parseInt(price.innerHTML)+15;
+          //     subTotal.innerHTML=parseInt(subTotal.innerHTML)+15;
+          //     total.innerHTML=parseInt(subTotal.innerHTML)+parseInt(shipping.innerHTML);
+          //   }
+            
+          // }
+        
+        
+          // function discountCode(){
+        
+          //   if(coupon.value=="mizan"){
+          //     total.innerHTML=parseInt(total.innerHTML)-30;
+          //     alert("you get 30 taka discount!!")
+          //   }
+            
+          // }
+        
+        
+        
+        
+        </script>
+    
     {% endblock %}

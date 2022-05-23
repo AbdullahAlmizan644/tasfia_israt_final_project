@@ -1,4 +1,4 @@
-from flask import Blueprint, redirect, render_template,request,flash
+from flask import Blueprint, redirect, render_template,request,flash,session
 from .__init__ import db
 from .settings import info
 from datetime import datetime
@@ -10,19 +10,21 @@ auth=Blueprint('auth', __name__)
 @auth.route("/login", methods=["GET","POST"])
 def login():
     if request.method=="POST":
-        email=request.form.get("email")
+        name=request.form.get("name")
         password=request.form.get("password")
 
         cur=db.connection.cursor()
-        cur.execute("SELECT * FROM  users where email=%s and password=%s",(email,password,))
+        cur.execute("SELECT * FROM  users where username=%s and password=%s",(name,password,))
         user=cur.fetchone()
 
         if user:
+            session["user"]=name
             flash("successfully login!", category="success")
             return redirect("/profile")
 
         else:
             flash("wrong email or password", category="error")
+
 
     return render_template("auth/login.html")
 
@@ -75,7 +77,19 @@ def sign_up():
 
 @auth.route("/profile")
 def profile():
-    return render_template("auth/profile.html")
+    if "user" in session:
+        cur=db.connection.cursor()
+        cur.execute("SELECT * FROM  users where username=%s",(session["user"],))
+        user=cur.fetchone()
+        return render_template("auth/profile.html",user=user)
+    else:
+        return redirect("/login")
+
+
+@auth.route("/user_logout")
+def user_logout():
+    session.pop("user",None)
+    return redirect("/")
 
 
 

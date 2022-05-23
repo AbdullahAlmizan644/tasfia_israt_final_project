@@ -104,6 +104,15 @@
               <i class="menu-arrow"></i>
             </a>
           </li>
+          <li class="nav-item menu-items">
+            <a class="nav-link"  href="/all_order">
+              <span class="menu-icon">
+                <i class="mdi mdi-laptop"></i>
+              </span>
+              <span class="menu-title">Orders</span>
+              <i class="menu-arrow"></i>
+            </a>
+          </li>
           <!--<li class="nav-item menu-items">
             <a class="nav-link" href="pages/forms/basic_elements.html">
               <span class="menu-icon">
@@ -339,7 +348,7 @@
                     </div>
                   </a> -->
                   <div class="dropdown-divider"></div>
-                  <a class="dropdown-item preview-item">
+                  <a class="dropdown-item preview-item" href="/admin_logout">
                     <div class="preview-thumbnail">
                       <div class="preview-icon bg-dark rounded-circle">
                         <i class="mdi mdi-logout text-danger"></i>
@@ -353,11 +362,14 @@
                 </div>
               </li>
             </ul>
+            
             <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
               <span class="mdi mdi-format-line-spacing"></span>
             </button>
           </div>
+          
         </nav>
+
 
 
         {% block content %} {% endblock %}
